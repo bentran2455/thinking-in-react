@@ -3,7 +3,7 @@ import ProductRow from "./ProductRow";
 
 function ProductTable({ data, filterInStock, searching }) {
   let filteredArr;
-  if (searching.trim().length > 0) {
+  if (searching) {
     filteredArr = data.filter((product) =>
       product.name.toLowerCase().includes(searching.toLowerCase())
     );

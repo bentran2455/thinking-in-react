@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
-function SearchBar({
-  filterInStock,
-  handleFilterInStock,
-  searching,
-  handleSearching,
-}) {
+function SearchBar({ filterInStock, handleFilterInStock, handleSearching }) {
+  const [internalSearch, setInternalSearch] = useState("");
+  function handleInternalSearch(e) {
+    setInternalSearch(e.target.value);
+  }
   return (
     <form id="search-form">
       <input
         type="text"
         placeholder="Search product"
-        value={searching}
-        onChange={handleSearching}
+        value={internalSearch}
+        onChange={handleInternalSearch}
       />
+      <button type="button" onClick={() => handleSearching(internalSearch)}>
+        Find product
+      </button>
       <input
         type="checkbox"
         id="instock"

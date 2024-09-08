@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import ProductTable from "./ProductTable";
 
@@ -6,20 +6,27 @@ function FilterableProductTable({ data }) {
   const [filterInStock, setFilterInStock] = useState(false);
   function handleFilterInStock() {
     setFilterInStock(!filterInStock);
+    if (filterInStock) {
+      console.log("checked");
+    }
   }
   const [searching, setSearching] = useState("");
   function handleSearching(e) {
-    setSearching(e.target.value);
+    setSearching(e);
+    console.log(e);
   }
 
+  useEffect(() => {
+    console.log("Hello");
+  }, [filterInStock, searching]);
   return (
     <div>
       <SearchBar
         filterInStock={filterInStock}
         handleFilterInStock={handleFilterInStock}
-        searching={searching}
         handleSearching={handleSearching}
       />
+      {filterInStock ? <p>Checked</p> : null}
       <ProductTable
         data={data}
         filterInStock={filterInStock}
